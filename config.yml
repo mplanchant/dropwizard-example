@@ -2,5 +2,5 @@ logging:
   level: INFO
   loggers:
     com.logiccache: DEBUG
-template: Hello, %s!
-defaultName: Stranger
+defaultName: "Stranger"
+template: "Hello, %s!"

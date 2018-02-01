@@ -1,15 +1,15 @@
-package com.logiccache.dropwizard;
+package com.logiccache.dropwizard.configuration;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.dropwizard.Configuration;
 import org.hibernate.validator.constraints.NotEmpty;
 
-public class dropwizardExampleConfiguration extends Configuration {
+public class ExampleConfiguration extends Configuration {
     @NotEmpty
     private String template;
 
     @NotEmpty
-    private String defaultName = "Stranger";
+    private String defaultName;
 
     @JsonProperty
     public String getTemplate() {
@@ -27,7 +27,7 @@ public class dropwizardExampleConfiguration extends Configuration {
     }
 
     @JsonProperty
-    public void setDefaultName(String name) {
-        this.defaultName = name;
+    public void setDefaultName(String defaultName) {
+        this.defaultName = defaultName;
     }
 }

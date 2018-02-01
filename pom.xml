@@ -17,12 +17,23 @@
     <name>dropwizardExample</name>
 
     <properties>
+        <mainClass>com.logiccache.dropwizard.ExampleApplication</mainClass>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <dropwizard.version>1.2.2</dropwizard.version>
+        <swagger-annotations.version>1.5.16</swagger-annotations.version>
         <swagger-codegen-maven-plugin.version>2.3.1</swagger-codegen-maven-plugin.version>
-        <mainClass>com.logiccache.dropwizard.dropwizardExampleApplication</mainClass>
         <maven-javadoc-plugin.version>2.10.3</maven-javadoc-plugin.version>
+        <maven-shade-plugin.version>2.4.1</maven-shade-plugin.version>
+        <maven-jar-plugin.version>2.6</maven-jar-plugin.version>
+        <maven-compiler-plugin.version>3.6.1</maven-compiler-plugin.version>
+        <maven-source-plugin.version>2.4</maven-source-plugin.version>
+        <maven-javadoc-plugin.version>2.10.3</maven-javadoc-plugin.version>
+        <build-helper-maven-plugin.version>3.0.0</build-helper-maven-plugin.version>
+        <maven-project-info-reports-plugin.version>2.9</maven-project-info-reports-plugin.version>
+        <java.version>1.8</java.version>
+        <dagger.version>2.14.1</dagger.version>
+        <dagger-compiler.version>2.14.1</dagger-compiler.version>
     </properties>
 
     <dependencyManagement>
@@ -43,9 +54,14 @@
             <artifactId>dropwizard-core</artifactId>
         </dependency>
         <dependency>
+            <groupId>com.google.dagger</groupId>
+            <artifactId>dagger</artifactId>
+            <version>${dagger.version}</version>
+        </dependency>
+        <dependency>
             <groupId>io.swagger</groupId>
             <artifactId>swagger-annotations</artifactId>
-            <version>1.5.16</version>
+            <version>${swagger-annotations.version}</version>
         </dependency>
     </dependencies>
 
@@ -53,12 +69,14 @@
         <plugins>
             <plugin>
                 <artifactId>maven-shade-plugin</artifactId>
-                <version>2.4.1</version>
+                <version>${maven-shade-plugin.version}</version>
                 <configuration>
                     <createDependencyReducedPom>true</createDependencyReducedPom>
                     <transformers>
-                        <transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>
-                        <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                        <transformer
+                                implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>
+                        <transformer
+                                implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
                             <mainClass>${mainClass}</mainClass>
                         </transformer>
                     </transformers>
@@ -85,7 +103,7 @@
             </plugin>
             <plugin>
                 <artifactId>maven-jar-plugin</artifactId>
-                <version>2.6</version>
+                <version>${maven-jar-plugin.version}</version>
                 <configuration>
                     <archive>
                         <manifest>
@@ -97,15 +115,23 @@
             </plugin>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.6.1</version>
+                <version>${maven-compiler-plugin.version}</version>
                 <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                    <useIncrementalCompilation>false</useIncrementalCompilation>
+                    <annotationProcessorPaths>
+                        <path>
+                            <groupId>com.google.dagger</groupId>
+                            <artifactId>dagger-compiler</artifactId>
+                            <version>${dagger-compiler.version}</version>
+                        </path>
+                    </annotationProcessorPaths>
                 </configuration>
             </plugin>
             <plugin>
                 <artifactId>maven-source-plugin</artifactId>
-                <version>2.4</version>
+                <version>${maven-source-plugin.version}</version>
                 <executions>
                     <execution>
                         <id>attach-sources</id>
@@ -117,7 +143,7 @@
             </plugin>
             <plugin>
                 <artifactId>maven-javadoc-plugin</artifactId>
-                <version>2.10.3</version>
+                <version>${maven-javadoc-plugin.version}</version>
                 <executions>
                     <execution>
                         <id>attach-javadocs</id>
@@ -155,7 +181,7 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>build-helper-maven-plugin</artifactId>
-                <version>3.0.0</version>
+                <version>${build-helper-maven-plugin.version}</version>
                 <executions>
                     <execution>
                         <phase>generate-sources</phase>
@@ -164,7 +190,7 @@
                         </goals>
                         <configuration>
                             <sources>
-                                <source>${project.build.directory}/generated-sources/swagger</source>
+                                <source>${project.build.directory}/generated-sources/</source>
                             </sources>
                         </configuration>
                     </execution>
@@ -177,7 +203,7 @@
         <plugins>
             <plugin>
                 <artifactId>maven-project-info-reports-plugin</artifactId>
-                <version>2.9</version>
+                <version>${maven-project-info-reports-plugin.version}</version>
                 <configuration>
                     <dependencyLocationsEnabled>false</dependencyLocationsEnabled>
                     <dependencyDetailsEnabled>false</dependencyDetailsEnabled>
