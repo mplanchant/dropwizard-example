@@ -20,7 +20,7 @@
         <mainClass>com.logiccache.dropwizard.ExampleApplication</mainClass>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <dropwizard.version>1.2.2</dropwizard.version>
+        <dropwizard.version>2.0.12</dropwizard.version>
         <swagger-annotations.version>1.5.16</swagger-annotations.version>
         <swagger-codegen-maven-plugin.version>2.3.1</swagger-codegen-maven-plugin.version>
         <maven-javadoc-plugin.version>2.10.3</maven-javadoc-plugin.version>
